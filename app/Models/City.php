@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Gym;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,17 @@ class City extends Model
         'slug',
         'photo'
     ];
+
+    /**
+     * Slug for city
+     *
+     * Save Slug from Name
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     /**
      * Get all of the gym for the City

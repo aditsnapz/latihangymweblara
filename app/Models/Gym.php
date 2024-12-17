@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\City;
 use App\Models\GymPhoto;
 use App\Models\GymFacility;
+use Illuminate\Support\Str;
 use App\Models\GymTestimonial;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,6 +27,17 @@ class Gym extends Model
         'is_popular',
         'address',
     ];
+
+    /**
+     * Slug for city
+     *
+     * Save Slug from Name
+     */
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     /**
      * Get the city that owns the Gym
